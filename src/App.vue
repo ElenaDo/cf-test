@@ -83,4 +83,9 @@ export default {
   display: flex;
   align-items: flex-start;
 }
+@media (max-width: 600px) {
+  .row {
+    flex-direction: column;
+  }
+}
 </style>

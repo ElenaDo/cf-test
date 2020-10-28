@@ -37,6 +37,11 @@ export default {
 </script>
 
 <style scoped>
+@media (max-width: 600px) {
+  div.course-card {
+    margin: 0.5em auto;
+  }
+}
 .course-card {
   background-color: #f0f1f3;
   border: 1px solid #2c3e50;
