@@ -1,10 +1,12 @@
 <template>
   <div id="app">
+    <div class="row">
     <CourseCard
       v-for="course in courseList"
       :key="course.slug"
       :course="course"
     />
+    </div>
   </div>
 </template>
 
@@ -45,5 +47,8 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.row {
+  display: flex;
 }
 </style>
