@@ -15,16 +15,16 @@
         </ul>
       </div>
     </div>
-    <div v-else class="loading">
-      Loading...
-    </div>
+    <Loading v-else />
   </div>
 </template>
 <script>
 import moment from 'moment';
+import Loading from './Loading.vue';
 
 export default {
   name: 'CourseDetails',
+  components: { Loading },
   props: {
     details: { type: Object },
     location: { type: String },
@@ -64,8 +64,5 @@ div.details-container {
   color: #a7b1b9;
   font-size: 0.9em;
   margin: 0.1em;
-}
-.loading{
-  min-height: 100px;
 }
 </style>
