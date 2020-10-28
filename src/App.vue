@@ -31,24 +31,21 @@ export default {
     this.getCourses();
   },
   methods: {
-    async getCourses() {
+    async get(path = '') {
+      let result = {};
       try {
         const host = process.env.VUE_APP_HOST;
-        const result = await axios(host);
-        this.courseList = result.data;
+        result = await axios(host + path);
       } catch (err) {
         console.error(err);
       }
+      return result.data;
+    },
+    async getCourses() {
+      this.courseList = await this.get();
     },
     async getCourseDetails() {
-      this.courseDetails = {};
-      try {
-        const host = process.env.VUE_APP_HOST;
-        const result = await axios(`${host}/${this.selectedSlug}`);
-        this.courseDetails = result.data;
-      } catch (err) {
-        console.error(err);
-      }
+      this.courseDetails = await this.get(`/${this.selectedSlug}`);
     },
     selectCard(slug) {
       this.selectedSlug = slug;
