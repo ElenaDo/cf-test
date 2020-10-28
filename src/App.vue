@@ -43,9 +43,12 @@ export default {
       this.courseList = await this.get();
     },
     async getCourseDetails() {
-      const details = await this.get(`/${this.selectedSlug}`);
       const index = this.courseList.findIndex((item) => item.slug === this.selectedSlug);
-      this.$set(this.courseList[index], 'details', details);
+      if (!this.courseList[index].details) {
+        const details = await this.get(`/${this.selectedSlug}`);
+        // Vue.set to make new property reactive
+        this.$set(this.courseList[index], 'details', details);
+      }
     },
     selectCard(slug) {
       this.selectedSlug = slug;
