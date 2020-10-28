@@ -56,7 +56,7 @@ export default {
     async getLocation() {
       try {
         const key = process.env.VUE_APP_IPSTACK_KEY;
-        const result = await axios(`http://api.ipstack.com/84.177.222.128?access_key=${key}`);
+        const result = await axios(`http://api.ipstack.com/check?access_key=${key}`);
         if (result) this.location = result.data.continent_code;
       } catch (err) {
         console.error(err);
