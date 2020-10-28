@@ -3,17 +3,20 @@
     <div class="card-body">
     <h3>{{course.title}}</h3>
     </div>
-    <div v-if="course.details" class="course-details">
-      {{course.details.description}}
-    </div>
+    <CourseDetails v-if="course.details" :details="course.details"/>
     <button v-if="!active" class="course-card-button" @click="select">
       See details
     </button>
   </div>
 </template>
 <script>
+import CourseDetails from './CourseDetails.vue';
+
 export default {
   name: 'CourseCard',
+  components: {
+    CourseDetails,
+  },
   props: {
     course: Object,
     active: Boolean,
