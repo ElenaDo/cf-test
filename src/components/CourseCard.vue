@@ -3,9 +3,12 @@
     <div class="card-body">
     <h3>{{course.title}}</h3>
     </div>
-  <button class="course-card-button" @click="select">
-    See details
-  </button>
+    <div v-if="active" class="course-details">
+      {{courseDetails.description}}
+    </div>
+    <button v-else class="course-card-button" @click="select">
+      See details
+    </button>
   </div>
 </template>
 <script>
@@ -14,6 +17,7 @@ export default {
   props: {
     course: Object,
     active: Boolean,
+    courseDetails: Object,
   },
   methods: {
     select() {

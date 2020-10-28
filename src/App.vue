@@ -7,6 +7,7 @@
       :course="course"
       @select="selectCard(course.slug)"
       :active="selectedSlug === course.slug"
+      :courseDetails = "courseDetails"
     />
     </div>
   </div>
@@ -23,7 +24,7 @@ export default {
   },
   data: () => ({
     courseList: [],
-    courseInfo: {},
+    courseDetails: {},
     selectedSlug: '',
   }),
   mounted() {
@@ -40,10 +41,11 @@ export default {
       }
     },
     async getCourseDetails() {
+      this.courseDetails = {};
       try {
         const host = process.env.VUE_APP_HOST;
         const result = await axios(`${host}/${this.selectedSlug}`);
-        this.courseInfo = result.data;
+        this.courseDetails = result.data;
       } catch (err) {
         console.error(err);
       }
@@ -67,5 +69,6 @@ export default {
 }
 .row {
   display: flex;
+  align-items: flex-start;
 }
 </style>
