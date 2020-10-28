@@ -2,8 +2,9 @@
   <div :class="[{'active': active}, 'course-card']">
     <div class="card-body">
     <h3>{{course.title}}</h3>
+    <p>Course starts on {{course.next_start_formatted}}</p>
     </div>
-    <CourseDetails v-if="course.details" :details="course.details"/>
+    <CourseDetails v-if="active && course.details" :details="course.details"/>
     <button v-if="!active" class="course-card-button" @click="select">
       See details
     </button>
