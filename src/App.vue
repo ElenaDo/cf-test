@@ -1,20 +1,24 @@
 <template>
   <div id="app">
-    <div v-for="course in coursesList" :key="course.slug">
-      {{course.title}}
-    </div>
+    <CourseCard
+      v-for="course in courseList"
+      :key="course.slug"
+      :course="course"
+    />
   </div>
 </template>
 
 <script>
 import axios from 'axios';
+import CourseCard from './components/CourseCard.vue';
 
 export default {
   name: 'App',
   components: {
+    CourseCard,
   },
   data: () => ({
-    coursesList: [],
+    courseList: [],
   }),
   mounted() {
     this.getCourses();
@@ -24,8 +28,7 @@ export default {
       try {
         const host = process.env.VUE_APP_HOST;
         const result = await axios(host);
-        this.coursesList = result.data;
-        console.log(this.coursesList);
+        this.courseList = result.data;
       } catch (err) {
         console.error(err);
       }
