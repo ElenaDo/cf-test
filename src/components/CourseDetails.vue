@@ -1,7 +1,7 @@
 <template>
   <div>
     {{details.description}}
-    <p>{{details.prices[0].amount}}</p>
+    <p>Price: {{price.symbol}}{{price.amount}}</p>
     <div class="next-start-dates">
       <p>Next start dates:</p>
       <ul>
@@ -28,6 +28,12 @@ export default {
     formattedDates() {
       return this.details.start_dates.map((item) => moment(item).format('dddd, MMMM Do YYYY'));
     },
+    price() {
+      const currency = this.location === 'EU' ? 'eur' : 'usd';
+      const { amount } = this.details.prices.find((item) => item.currency === currency);
+      const symbol = this.location === 'EU' ? '€' : '$';
+      return { amount, symbol };
+    },
   },
 };
 </script>
@@ -46,4 +52,5 @@ export default {
   font-size: 0.9em;
   margin: 0.1em;
 }
+
 </style>
