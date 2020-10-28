@@ -23,6 +23,7 @@ export default {
   },
   data: () => ({
     courseList: [],
+    courseInfo: {},
     selectedSlug: '',
   }),
   mounted() {
@@ -38,8 +39,18 @@ export default {
         console.error(err);
       }
     },
+    async getCourseDetails() {
+      try {
+        const host = process.env.VUE_APP_HOST;
+        const result = await axios(`${host}/${this.selectedSlug}`);
+        this.courseInfo = result.data;
+      } catch (err) {
+        console.error(err);
+      }
+    },
     selectCard(slug) {
       this.selectedSlug = slug;
+      this.getCourseDetails();
     },
   },
 };
