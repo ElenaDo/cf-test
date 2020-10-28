@@ -1,9 +1,9 @@
 <template>
-  <div class="course-card">
+  <div :class="[{'active': active}, 'course-card']">
     <div class="card-body">
     <h3>{{course.title}}</h3>
     </div>
-  <button class="course-card-button">
+  <button class="course-card-button" @click="select">
     See details
   </button>
   </div>
@@ -13,6 +13,12 @@ export default {
   name: 'CourseCard',
   props: {
     course: Object,
+    active: Boolean,
+  },
+  methods: {
+    select() {
+      this.$emit('select');
+    },
   },
 };
 </script>
@@ -25,6 +31,9 @@ export default {
   width: 300px;
   margin: 2em;
   padding: 1em;
+}
+.active.course-card {
+  background-color: #fff;
 }
 .card-body {
   min-height: 8em;

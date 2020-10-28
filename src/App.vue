@@ -5,6 +5,8 @@
       v-for="course in courseList"
       :key="course.slug"
       :course="course"
+      @select="selectCard(course.slug)"
+      :active="selectedSlug === course.slug"
     />
     </div>
   </div>
@@ -21,6 +23,7 @@ export default {
   },
   data: () => ({
     courseList: [],
+    selectedSlug: '',
   }),
   mounted() {
     this.getCourses();
@@ -34,6 +37,9 @@ export default {
       } catch (err) {
         console.error(err);
       }
+    },
+    selectCard(slug) {
+      this.selectedSlug = slug;
     },
   },
 };
