@@ -5,7 +5,6 @@
     <p>Course starts on {{course.next_start_formatted}}</p>
     </div>
     <CourseDetails
-      v-if="active && course.details"
       :details="course.details"
       :location="location"
     />
@@ -36,7 +35,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 @media (max-width: 600px) {
   div.course-card {
     margin: 0.5em auto;
