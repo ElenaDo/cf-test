@@ -7,6 +7,7 @@
       :course="course"
       @select="selectCard(course.slug)"
       :active="selectedSlug === course.slug"
+      :location="location"
     />
     </div>
   </div>
@@ -24,9 +25,11 @@ export default {
   data: () => ({
     courseList: [],
     selectedSlug: '',
+    location: '',
   }),
   mounted() {
     this.getCourses();
+    this.getLocation();
   },
   methods: {
     async get(path = '') {
@@ -50,6 +53,15 @@ export default {
         this.$set(this.courseList[index], 'details', details);
       }
     },
+    async getLocation() {
+      try {
+        const key = process.env.VUE_APP_IPSTACK_KEY;
+        const result = await axios(`http://api.ipstack.com/84.177.222.128?access_key=${key}`);
+        if (result) this.location = result.data.continent_code;
+      } catch (err) {
+        console.error(err);
+      }
+    },
     selectCard(slug) {
       this.selectedSlug = slug;
       this.getCourseDetails();
@@ -60,7 +72,7 @@ export default {
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: TradeGothic,Helvetica,Arial,sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

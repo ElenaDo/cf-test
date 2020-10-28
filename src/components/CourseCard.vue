@@ -4,7 +4,11 @@
     <h3>{{course.title}}</h3>
     <p>Course starts on {{course.next_start_formatted}}</p>
     </div>
-    <CourseDetails v-if="active && course.details" :details="course.details"/>
+    <CourseDetails
+      v-if="active && course.details"
+      :details="course.details"
+      :location="location"
+    />
     <button v-if="!active" class="course-card-button" @click="select">
       See details
     </button>
@@ -22,6 +26,7 @@ export default {
     course: Object,
     active: Boolean,
     courseDetails: Object,
+    location: String,
   },
   methods: {
     select() {

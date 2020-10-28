@@ -22,6 +22,7 @@ export default {
   name: 'CourseDetails',
   props: {
     details: { type: Object, required: true },
+    location: { type: String },
   },
   computed: {
     formattedDates() {
