@@ -7,7 +7,6 @@
       :course="course"
       @select="selectCard(course.slug)"
       :active="selectedSlug === course.slug"
-      :courseDetails = "courseDetails"
     />
     </div>
   </div>
@@ -24,7 +23,6 @@ export default {
   },
   data: () => ({
     courseList: [],
-    courseDetails: {},
     selectedSlug: '',
   }),
   mounted() {
@@ -45,7 +43,9 @@ export default {
       this.courseList = await this.get();
     },
     async getCourseDetails() {
-      this.courseDetails = await this.get(`/${this.selectedSlug}`);
+      const details = await this.get(`/${this.selectedSlug}`);
+      const index = this.courseList.findIndex((item) => item.slug === this.selectedSlug);
+      this.$set(this.courseList[index], 'details', details);
     },
     selectCard(slug) {
       this.selectedSlug = slug;

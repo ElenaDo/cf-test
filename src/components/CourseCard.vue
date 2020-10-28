@@ -3,10 +3,10 @@
     <div class="card-body">
     <h3>{{course.title}}</h3>
     </div>
-    <div v-if="active" class="course-details">
-      {{courseDetails.description}}
+    <div v-if="course.details" class="course-details">
+      {{course.details.description}}
     </div>
-    <button v-else class="course-card-button" @click="select">
+    <button v-if="!active" class="course-card-button" @click="select">
       See details
     </button>
   </div>
